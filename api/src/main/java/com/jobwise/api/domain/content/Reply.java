@@ -1,22 +1,17 @@
-package com.jobwise.api.domain.post;
+package com.jobwise.api.domain.content;
 
 import com.jobwise.api.domain.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import static jakarta.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = PROTECTED)
-public class Reply extends Component{
-    @Id
-    @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "reply_id")
-    private Long id;
-
+@DiscriminatorValue("REPLY")
+public class Reply extends Content {
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)

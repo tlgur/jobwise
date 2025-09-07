@@ -23,9 +23,9 @@ public class JobCategory {
 
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "jobCategory")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "jobCategory", cascade = CascadeType.ALL)
     private List<PostJobCategory> postJobCategory = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "jobCategory")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "jobCategory", cascade = CascadeType.ALL)
     private List<UserJobCategory> userJobCategory = new ArrayList<>();
 }

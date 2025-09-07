@@ -1,4 +1,4 @@
-package com.jobwise.api.domain.post;
+package com.jobwise.api.domain.content;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -14,18 +14,20 @@ import static lombok.AccessLevel.PROTECTED;
 @Getter
 @NoArgsConstructor(access = PROTECTED)
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public abstract class Component {
+@DiscriminatorColumn()
+public abstract class Content {
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "component_id")
+    @Column(name = "content_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id")
-    private Component parent;
+    private Content parent;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "parent")
-    private List<Component> children = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "parent", cascade = CascadeType.ALL)
+    private List<Content> replies = new ArrayList<>();
 
-    private Integer depth = 0;
+    private int depth = 0;
+
 }
