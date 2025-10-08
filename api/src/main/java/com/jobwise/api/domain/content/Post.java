@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static lombok.AccessLevel.PROTECTED;
@@ -19,10 +20,7 @@ public class Post extends Content {
     private String title;
     private String body;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    private final List<PostJobCategory> taggingJobs = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "post", cascade = CascadeType.ALL)
-    private List<PostJobCategory> jobCategories = new ArrayList<>();
 }

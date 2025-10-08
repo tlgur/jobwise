@@ -1,8 +1,8 @@
 package com.jobwise.api.domain;
 
+import com.jobwise.api.domain.content.Comment;
 import com.jobwise.api.domain.mapping_table.UserJobCategory;
 import com.jobwise.api.domain.content.Post;
-import com.jobwise.api.domain.content.Reply;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,11 +25,20 @@ public class User {
     private String username;
     private String password;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+    private String fullName;
+    private String nickname;
+
+    private String realName;
+
+    /*
+    TBD : 좋아요/취소/스크랩 기능
+     */
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "writer", cascade = CascadeType.ALL)
     private List<Post> posts = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Reply> replies = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "writer", cascade = CascadeType.ALL)
+    private List<Comment> comments = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
     private List<UserJobCategory> jobCategories = new ArrayList<>();
