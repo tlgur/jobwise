@@ -10,20 +10,20 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create  # Flyway? ?????? ??
+      ddl-auto: none  # Flyway? ?????? ??
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
         format_sql: true
         show_sql: true
         use_sql_comments: true
-      javax:
-        persistence:
-          schema-generation:
-            scripts:
-              action: create
-              create-target: build/schema-create.sql
-            create-source: metadata
+#      javax:
+#        persistence:
+#          schema-generation:
+#            scripts:
+#              action: create
+#              create-target: build/schema-create.sql
+#            create-source: metadata
     open-in-view: false
 
 #  flyway:

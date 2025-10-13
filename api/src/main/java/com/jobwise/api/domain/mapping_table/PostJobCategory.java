@@ -25,4 +25,13 @@ public class PostJobCategory {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "job_category_id")
     private JobCategory jobCategory;
+
+    private PostJobCategory(Post post, JobCategory jobCategory) {
+        this.post = post;
+        this.jobCategory = jobCategory;
+    }
+
+    public static PostJobCategory tagPostAndJob(Post post, JobCategory taggingJob) {
+        return new PostJobCategory(post, taggingJob);
+    }
 }

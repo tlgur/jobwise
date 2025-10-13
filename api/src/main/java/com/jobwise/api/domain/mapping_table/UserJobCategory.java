@@ -25,4 +25,13 @@ public class UserJobCategory {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
+    private UserJobCategory(User user, JobCategory jobCategory) {
+        this.user = user;
+        this.jobCategory = jobCategory;
+    }
+
+    public static UserJobCategory matchUserAndJob(User user, JobCategory taggingJob) {
+        return new UserJobCategory(user, taggingJob);
+    }
 }

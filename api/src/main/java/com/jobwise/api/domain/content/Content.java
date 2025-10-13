@@ -16,17 +16,28 @@ import static lombok.AccessLevel.PROTECTED;
 @NoArgsConstructor(access = PROTECTED)
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn()
-public class Content {
+public abstract class Content {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "content_id")
     private Long id;
+
+    private int depth = 0;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "writer_id")
     private User writer;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Comment> comments = new ArrayList<>();
+    private final List<Comment> comments = new ArrayList<>();
 
+     protected Content(User writer) {
+        this.writer = writer;
+        this.depth = 0;
+    }
+
+     protected Content(User writer, Content parent) {
+        this.writer = writer;
+        this.depth = parent.depth + 1;
+    }
 }

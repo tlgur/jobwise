@@ -1,5 +1,6 @@
 package com.jobwise.api.domain.content;
 
+import com.jobwise.api.domain.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
@@ -22,5 +23,17 @@ public class Comment extends Content {
     private Post rootPost;
 
     private String body;
-    private int depth = 0;
+
+    private Comment(User writer, String body, Content parent) {
+        super(writer, parent);
+        this.body = body;
+        this.parent = parent;
+    }
+
+    public static Comment newComment(User writer, String body, Content parent, Post rootPost) {
+        Comment comment = new Comment(writer, body, parent);
+        writer.writeNewComment(comment);
+        comment.rootPost = rootPost;
+        return comment;
+    }
 }
