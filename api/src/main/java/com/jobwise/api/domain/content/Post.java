@@ -18,11 +18,13 @@ import static lombok.AccessLevel.PROTECTED;
 @NoArgsConstructor(access = PROTECTED)
 @DiscriminatorValue("POST")
 public class Post extends Content {
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
-    private final List<PostJobCategory> taggingJobs = new ArrayList<>();
+
     private String title;
     @Lob
     private String body;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    private final List<PostJobCategory> taggingJobs = new ArrayList<>();
 
     private Post(User writer, String title, String body){
         super(writer);

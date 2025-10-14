@@ -32,6 +32,8 @@ public class UserJobCategory {
     }
 
     public static UserJobCategory matchUserAndJob(User user, JobCategory taggingJob) {
-        return new UserJobCategory(user, taggingJob);
+        UserJobCategory userJobCategory = new UserJobCategory(user, taggingJob);
+        taggingJob.matchUserAndJob(userJobCategory);
+        return userJobCategory;
     }
 }

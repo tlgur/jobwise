@@ -29,10 +29,6 @@ public class User {
     private String realName;
     private String nickname;
 
-    /*
-    TBD : 좋아요/취소/스크랩 기능
-     */
-
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "writer", cascade = CascadeType.ALL)
     private final List<Post> writtenPost = new ArrayList<>();
 
@@ -41,14 +37,6 @@ public class User {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
     private final List<UserJobCategory> jobCategories = new ArrayList<>();
-
-    public void writeNewPost(Post post) {
-        writtenPost.add(post);
-    }
-
-    public void writeNewComment(Comment comment) {
-        writtenComments.add(comment);
-    }
 
     private User(String username, String password, String realName, String nickname) {
         this.username = username;
@@ -64,4 +52,13 @@ public class User {
                 .forEach(user.jobCategories::add);
         return user;
     }
+
+    public void writeNewPost(Post post) {
+        writtenPost.add(post);
+    }
+
+    public void writeNewComment(Comment comment) {
+        writtenComments.add(comment);
+    }
+
 }

@@ -22,11 +22,19 @@ public class JobCategory {
     private Long id;
 
     private String name;
-//
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "jobCategory", cascade = CascadeType.ALL)
-//    private List<PostJobCategory> postJobCategory = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "jobCategory", cascade = CascadeType.ALL)
-    private List<UserJobCategory> userJobCategory = new ArrayList<>();
+    private final List<UserJobCategory> userJobCategories = new ArrayList<>();
 
+    private JobCategory(String name){
+        this.name = name;
+    }
+
+    public static JobCategory newJobCategory(String name){
+        return new JobCategory(name);
+    }
+
+    public void matchUserAndJob(UserJobCategory userJobCategory){
+        userJobCategories.add(userJobCategory);
+    }
 }

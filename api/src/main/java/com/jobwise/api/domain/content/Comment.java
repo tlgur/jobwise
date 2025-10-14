@@ -1,10 +1,7 @@
 package com.jobwise.api.domain.content;
 
 import com.jobwise.api.domain.User;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -13,10 +10,8 @@ import static lombok.AccessLevel.PROTECTED;
 @Entity
 @Getter
 @NoArgsConstructor(access = PROTECTED)
+@DiscriminatorValue("COMMENT")
 public class Comment extends Content {
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_id")
-    private Content parent;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "root_post_id")
@@ -25,9 +20,9 @@ public class Comment extends Content {
     private String body;
 
     private Comment(User writer, String body, Content parent) {
-        super(writer, parent);
+        super(writer);
         this.body = body;
-        this.parent = parent;
+        parent.addComment(this);
     }
 
     public static Comment newComment(User writer, String body, Content parent, Post rootPost) {
