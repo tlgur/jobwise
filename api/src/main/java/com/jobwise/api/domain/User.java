@@ -35,7 +35,7 @@ public class User {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "writer", cascade = CascadeType.ALL)
     private final List<Comment> writtenComments = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", orphanRemoval = true)
     private final List<UserJobCategory> jobCategories = new ArrayList<>();
 
     private User(String username, String password, String realName, String nickname) {
@@ -45,11 +45,8 @@ public class User {
         this.nickname = nickname;
     }
 
-    public static User newUser(String username, String password, String realName, String nickname, JobCategory... matchingJobs) {
+    public static User newUser(String username, String password, String realName, String nickname) {
         User user = new User(username, password, realName, nickname);
-        Arrays.stream(matchingJobs)
-                .map(job -> UserJobCategory.matchUserAndJob(user, job))
-                .forEach(user.jobCategories::add);
         return user;
     }
 
@@ -61,4 +58,7 @@ public class User {
         writtenComments.add(comment);
     }
 
+    public void addNewJob(UserJobCategory matchingJob) {
+        jobCategories.add(matchingJob);
+    }
 }

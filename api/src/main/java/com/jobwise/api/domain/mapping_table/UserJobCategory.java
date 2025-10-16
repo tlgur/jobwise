@@ -33,6 +33,7 @@ public class UserJobCategory {
 
     public static UserJobCategory matchUserAndJob(User user, JobCategory taggingJob) {
         UserJobCategory userJobCategory = new UserJobCategory(user, taggingJob);
+        user.addNewJob(userJobCategory);
         taggingJob.matchUserAndJob(userJobCategory);
         return userJobCategory;
     }

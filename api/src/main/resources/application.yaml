@@ -41,18 +41,3 @@ logging:
     org.hibernate.SQL: debug
     org.hibernate.orm.jdbc.bind: trace  # ??? ?????? ??
     com.jobwise: debug
-
----
-
-# ? ?? ??? ?? (local)
-spring:
-  config:
-    activate:
-      on-profile: local
-  datasource:
-    url: jdbc:mysql://localhost:3307/jobwise?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-    username: root
-    password: root
-  jpa:
-    hibernate:
-      ddl-auto: none
