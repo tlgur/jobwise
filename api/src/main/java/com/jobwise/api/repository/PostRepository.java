@@ -1,6 +1,6 @@
-package com.jobwise.api.repository.content;
+package com.jobwise.api.repository;
 
-import com.jobwise.api.domain.content.Post;
+import com.jobwise.api.domain.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

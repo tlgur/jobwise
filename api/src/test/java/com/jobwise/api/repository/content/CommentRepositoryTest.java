@@ -2,9 +2,7 @@ package com.jobwise.api.repository.content;
 
 import com.jobwise.api.domain.JobCategory;
 import com.jobwise.api.domain.User;
-import com.jobwise.api.domain.content.Comment;
 import com.jobwise.api.domain.content.Content;
-import com.jobwise.api.domain.content.Post;
 import com.jobwise.api.repository.RepositoryTest;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,9 +12,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 class CommentRepositoryTest extends RepositoryTest {

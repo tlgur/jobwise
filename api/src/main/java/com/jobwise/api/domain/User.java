@@ -1,14 +1,11 @@
 package com.jobwise.api.domain;
 
-import com.jobwise.api.domain.content.Comment;
 import com.jobwise.api.domain.mapping_table.UserJobCategory;
-import com.jobwise.api.domain.content.Post;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static jakarta.persistence.GenerationType.IDENTITY;

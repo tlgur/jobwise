@@ -1,7 +1,7 @@
 package com.jobwise.api.domain.mapping_table;
 
 import com.jobwise.api.domain.JobCategory;
-import com.jobwise.api.domain.content.Post;
+import com.jobwise.api.domain.Post;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

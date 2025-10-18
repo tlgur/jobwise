@@ -2,9 +2,9 @@ package com.jobwise.api.repository.content;
 
 import com.jobwise.api.domain.JobCategory;
 import com.jobwise.api.domain.User;
-import com.jobwise.api.domain.content.Post;
 import com.jobwise.api.domain.mapping_table.PostJobCategory;
 import com.jobwise.api.domain.mapping_table.UserJobCategory;
+import com.jobwise.api.repository.PostRepository;
 import com.jobwise.api.repository.RepositoryTest;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
