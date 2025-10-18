@@ -3,7 +3,7 @@ spring:
     name: jobwise
 
   datasource:
-    url: jdbc:mysql://db:3306/jobwise?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    url: jdbc:mysql://localhost:3307/jobwise?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
