@@ -51,8 +51,8 @@ public class UserRepositoryTest extends RepositoryTest {
 
         //then
         Optional<User> findUser = userRepository.findById(id);
-        assertThat(findUser).isNotEmpty();
-        assertThat(findUser.get()).usingRecursiveComparison().isEqualTo(sampleUser);
+        assertThat(findUser).isPresent();
+        assertThat(findUser).get().usingRecursiveComparison().isEqualTo(sampleUser);
 
         log.debug("findUser.get().getId() : {}", findUser.get().getId());
         log.debug("findUser.get().getId() : {}", findUser.get().getUsername());

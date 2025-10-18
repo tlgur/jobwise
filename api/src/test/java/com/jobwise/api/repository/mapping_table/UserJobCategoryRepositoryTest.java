@@ -62,12 +62,13 @@ class UserJobCategoryRepositoryTest extends RepositoryTest {
 
         //then
         Optional<UserJobCategory> findUserJobCategory = userJobCategoryRepository.findById(id);
-        assertThat(findUserJobCategory).isNotEmpty();
+        assertThat(findUserJobCategory).isPresent();
         log.debug("findUserJobCategory.get().getId() : {}", findUserJobCategory.get().getId());
 
         //연관된 User
         User findUser = em.find(User.class, findUserJobCategory.get().getUser().getId());
         assertThat(findUser)
+                .isNotNull()
                 .usingRecursiveComparison()
                 .comparingOnlyFields("username", "password", "realName", "nickname")
                 .isEqualTo(sampleUser);
@@ -76,6 +77,7 @@ class UserJobCategoryRepositoryTest extends RepositoryTest {
 //        //연관된 Job
         JobCategory findJobCategory = em.find(JobCategory.class, findUserJobCategory.get().getJobCategory().getId());
         assertThat(findJobCategory)
+                .isNotNull()
                 .usingRecursiveComparison()
                 .comparingOnlyFields("name")
                 .isEqualTo(sampleJobCategory);

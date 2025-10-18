@@ -36,7 +36,7 @@ public abstract class Content {
     private final List<Content> comments = new ArrayList<>();
 
     protected Content(User writer) {
-        this.parent = this;
+        this.parent = null;
         this.writer = writer;
         this.depth = 0;
     }

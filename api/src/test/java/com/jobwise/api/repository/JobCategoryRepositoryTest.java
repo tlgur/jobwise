@@ -2,7 +2,6 @@ package com.jobwise.api.repository;
 
 import com.jobwise.api.domain.JobCategory;
 import jakarta.persistence.EntityManager;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -47,8 +46,8 @@ class JobCategoryRepositoryTest extends RepositoryTest {
 
         //then
         Optional<JobCategory> findJobCategory = jobCategoryRepository.findById(id);
-        assertThat(findJobCategory).isNotEmpty();
-        assertThat(findJobCategory.get()).usingRecursiveComparison().isEqualTo(sampleJobCategory);
+        assertThat(findJobCategory).isPresent();
+        assertThat(findJobCategory).get().usingRecursiveComparison().isEqualTo(sampleJobCategory);
         log.debug("findJobCategory.get().getId() : {}", findJobCategory.get().getId());
         log.debug("findJobCategory.get().getId() : {}", findJobCategory.get().getName());
     }
