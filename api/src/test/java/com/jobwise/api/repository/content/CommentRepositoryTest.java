@@ -1,8 +1,9 @@
 package com.jobwise.api.repository.content;
 
+import com.jobwise.api.domain.Comment;
 import com.jobwise.api.domain.JobCategory;
+import com.jobwise.api.domain.Post;
 import com.jobwise.api.domain.User;
-import com.jobwise.api.domain.content.Content;
 import com.jobwise.api.repository.RepositoryTest;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,6 +13,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
@@ -61,7 +63,7 @@ class CommentRepositoryTest extends RepositoryTest {
         //mocking
 
         //when
-        Comment comment = Comment.newComment(sampleUser, body, samplePost, samplePost);
+        Comment comment = Comment.newCommentToPost(sampleUser, body, samplePost);
         commentRepository.save(comment);
         Long id = comment.getId();
         em.flush();
@@ -75,20 +77,13 @@ class CommentRepositoryTest extends RepositoryTest {
                 .isEqualTo(body);
 
         //Content Tree 검증
-        assertThat(findComment.get().getDepth()).isEqualTo(samplePost.getDepth() + 1);
-        Content parentContent = findComment.get().getParent();
+        assertThat(findComment.get().getDepth()).isZero();
+        assertThat(findComment.get().getParent()).isNull();
 
-        assertThat(findComment.get().getRootPost())
-                .usingRecursiveComparison()
-                .isEqualTo(parentContent);
-        assertThat(parentContent)
+        assertThat(findComment.get().getPost())
                 .usingRecursiveComparison()
                 .comparingOnlyFields("title", "body")
                 .isEqualTo(samplePost);
-//        assertThat(parentContent.getComments())
-//                .extracting()
-//                .contains()
-
 
         //연관관계 검증 - writer
         User writer = findComment.get().getWriter();

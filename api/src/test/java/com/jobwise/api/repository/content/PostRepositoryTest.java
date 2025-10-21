@@ -1,6 +1,7 @@
 package com.jobwise.api.repository.content;
 
 import com.jobwise.api.domain.JobCategory;
+import com.jobwise.api.domain.Post;
 import com.jobwise.api.domain.User;
 import com.jobwise.api.domain.mapping_table.PostJobCategory;
 import com.jobwise.api.domain.mapping_table.UserJobCategory;
@@ -39,7 +40,7 @@ class PostRepositoryTest extends RepositoryTest {
         );
 
         JobCategory sampleUserJob = JobCategory.newJobCategory("sample User Job");
-        UserJobCategory sampleUserJobCategory = UserJobCategory.matchUserAndJob(sampleUser, sampleUserJob);
+        UserJobCategory.matchUserAndJob(sampleUser, sampleUserJob);
     }
 
     /**
@@ -74,14 +75,9 @@ class PostRepositoryTest extends RepositoryTest {
                 .comparingOnlyFields("title", "body")
                 .isEqualTo(post);
 
-        //Content Tree 검증
-        assertThat(findPost.get().getDepth())
-                .isEqualTo(0);
-        assertThat(findPost.get().getParent()).isNull();
-
         //연관관계 검증 - tagging Job
         Stream<JobCategory> findJobCategory = findPost.get()
-                .getTaggingJobs()
+                .getTaggedJobs()
                 .stream()
                 .map(PostJobCategory::getJobCategory);
         assertThat(findJobCategory)
