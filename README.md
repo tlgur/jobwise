@@ -10,4 +10,3 @@ Spring Boot + MySQL + Docker Compose 예제 프로젝트
 ## 실행 방법
 ```bash
 docker-compose up --build
-

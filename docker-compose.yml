@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   app:
     build: ./api
@@ -23,5 +25,7 @@ services:
       - "3307:3306"
     volumes:
       - db_data:/var/lib/mysql
+
 volumes:
   db_data:
+
